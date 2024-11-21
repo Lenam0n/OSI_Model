@@ -84,7 +84,7 @@ osiModel.transmit("Hello, OSI Model!");
 osiModel.endSession();
 ```
 
-##Erklärung
+## Erklärung
 
 	1.	Initialisierung des OSI-Modells:
 	•	Erstelle eine neue Instanz von OSIModel mit:
