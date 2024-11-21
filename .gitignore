@@ -1,0 +1,55 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Logs
+logs/
+*.log
+*.log.*
+
+# Environment variables
+.env
+
+# Build output
+dist/
+build/
+out/
+
+# TypeScript
+*.tsbuildinfo
+
+# MacOS
+.DS_Store
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Optional npm cache directory
+.npm
+
+# Parcel-bundler cache (if used)
+.cache/
+
+# Jest test logs
+coverage/
+
+# Temporary files
+*.tmp
+*.swp
+*.bak
+*.old
+
+# Nodemon
+.pids
+
+# Ignore compiled TypeScript files if generated
+*.js
+*.js.map
+*.d.ts
