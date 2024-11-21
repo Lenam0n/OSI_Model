@@ -117,7 +117,8 @@ Physical Layer: Transmitting bits...
 
 --- OSI Transmission Complete ---
 
-Session Layer: Session SESSION-XYZ12345 ended.```
+Session Layer: Session SESSION-XYZ12345 ended.
+```
 
 ## ⚙️ Verfügbare Ports
 
