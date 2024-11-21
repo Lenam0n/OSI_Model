@@ -47,7 +47,7 @@ src/
 ├── OSIModel.ts                # Hauptklasse für die OSI-Simulation
 ├── main.ts                    # Einstiegspunkt des Programms
 
-#🚀 Funktionen
+## 🚀 Funktionen
 
 	•	Schichten des OSI-Modells:
 	•	Alle 7 Schichten sind vollständig implementiert, einschließlich dynamischer Protokoll- und Datenfluss-Simulation.
@@ -60,7 +60,7 @@ src/
 	•	Dynamischer Protokollwechsel:
 	•	Unterstützt Protokolle wie Ethernet, IPv4, TCP, UDP und mehr.
 
-##💻 Beispiel in main.ts
+## 💻 Beispiel in main.ts
 
 ```typescript
 import OSIModel from "./OSIModel";
@@ -98,7 +98,7 @@ osiModel.endSession();
 	5.	Sitzung beenden:
 	•	Beende die Sitzung mit endSession.
 
-##Beispielausgabe
+## Beispielausgabe
 ```plaintext
 Presentation Layer: Encryption key updated.
 Session Layer: Session started with ID SESSION-XYZ12345
