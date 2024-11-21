@@ -46,6 +46,7 @@ src/
 │   ├── index-ports.ts
 ├── OSIModel.ts                # Hauptklasse für die OSI-Simulation
 ├── main.ts                    # Einstiegspunkt des Programms
+```
 
 ## 🚀 Funktionen
 
@@ -81,6 +82,7 @@ osiModel.transmit("Hello, OSI Model!");
 
 // End session
 osiModel.endSession();
+```
 
 ##Erklärung
 
@@ -115,7 +117,7 @@ Physical Layer: Transmitting bits...
 
 --- OSI Transmission Complete ---
 
-Session Layer: Session SESSION-XYZ12345 ended.
+Session Layer: Session SESSION-XYZ12345 ended.```
 
 ## ⚙️ Verfügbare Ports
 
