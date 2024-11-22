@@ -1,17 +1,22 @@
-import { NetworkProtocol } from "./NetworkProtocol";
+import { NetworkProtocolBase } from "./NetworkProtocolBase";
 
-export class IPv6 implements NetworkProtocol {
+export class IPv6 extends NetworkProtocolBase {
+  constructor() {
+    super({
+      version: 6,
+      payloadLength: 0, // Dynamisch basierend auf Daten
+      source: "2001:db8::1",
+      destination: "2001:db8::2",
+      hopLimit: 128,
+    });
+  }
+
   getName(): string {
     return "IPv6";
   }
 
   addRoutingInfo(data: string): string {
-    console.log("IPv6: Adding IPv6 header...");
-    return `IPv6_HEADER(${data})`;
-  }
-
-  removeRoutingInfo(packet: string): string {
-    console.log("IPv6: Removing IPv6 header...");
-    return packet.replace("IPv6_HEADER(", "").replace(")", "");
+    this.header.payloadLength = data.length; // Dynamisch setzen
+    return super.addRoutingInfo(data);
   }
 }

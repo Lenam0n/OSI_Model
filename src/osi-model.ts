@@ -8,7 +8,7 @@ import { ApplicationLayer } from "./layers/layer7/index-layer";
 import { TransportProtocol } from "./layers/layer4/protocols/TransportProtocol";
 import { DataLinkProtocol } from "./layers/layer2/protocols/DataLinkProtocol";
 import { NetworkProtocol } from "./layers/layer3/protocols/NetworkProtocol";
-import { SSH } from "./ports/index-ports"; // Import SSH and other ports from index-ports
+import { SSH } from "./ports/index-ports";
 
 export class OSIModel {
   private physical: PhysicalLayer;
