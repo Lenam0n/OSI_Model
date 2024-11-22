@@ -83,6 +83,7 @@ src/
 	•	Schicht 6 (Presentation): Kodierung und Verschlüsselung mit JSON, XML, Base64, ASCII, und Bildformaten.
 	•	Schicht 7 (Application): HTTP und HTTPS unterstützen GET, POST, PUT, DELETE sowie Header-Verwaltung.
 
+ 
  ## 💻 Beispiel in main.ts
 
  ```typescript
@@ -126,32 +127,32 @@ Port	Service	Beschreibung
 
 ## 📂 Verfügbare Protokolle
 
-# Layer 2: Data Link
+### Layer 2: Data Link
 
 	•	Ethernet
 	•	WiFi
 	•	VLAN
 	•	LACP
 
-# Layer 3: Network
+### Layer 3: Network
 
 	•	IPv4
 	•	IPv6
 	•	ICMP
 	•	OSPF
 
-# Layer 4: Transport
+### Layer 4: Transport
 
 	•	TCP
 	•	UDP
 	•	TLS
 	•	SSL
 
-# Layer 5: Session
+### Layer 5: Session
 
 	•	NetBIOS
 
-# Layer 6: Presentation
+### Layer 6: Presentation
 
 	•	JSON
 	•	XML
@@ -160,7 +161,7 @@ Port	Service	Beschreibung
 	•	Unicode
 	•	PNG, JPEG, GIF
 
-# Layer 7: Application
+### Layer 7: Application
 
 	•	HTTP
 	•	HTTPS
@@ -203,5 +204,5 @@ Port	Service	Beschreibung
 
 [HTTP] Tearing down connection to www.example.com...
 [HTTP] Connection to www.example.com closed successfully.
-´´´
+
 
