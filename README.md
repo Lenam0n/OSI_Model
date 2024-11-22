@@ -1,6 +1,6 @@
 # OSI Model Simulation
 
-Dieses Projekt simuliert das OSI-Schichtenmodell in TypeScript und zeigt, wie Daten durch die verschiedenen Schichten des OSI-Modells fließen. Es unterstützt dynamische Protokollwechsel und simuliert realistische Szenarien, einschließlich Verschlüsselung, Sitzungsmanagement und Port-Nutzung.
+Dieses Projekt simuliert das OSI-Schichtenmodell in TypeScript und zeigt, wie Daten durch die verschiedenen Schichten des OSI-Modells fließen. Es unterstützt dynamische Protokollwechsel und simuliert realistische Szenarien, einschließlich Verschlüsselung, Sitzungsmanagement, Header-Verwaltung und Port-Nutzung.
 
 ---
 
@@ -17,27 +17,48 @@ src/
 │   │   ├── protocols/         # Layer 2 Protokolle
 │   │   │   ├── Ethernet.ts
 │   │   │   ├── WiFi.ts
+│   │   │   ├── VLAN.ts
+│   │   │   ├── LACP.ts
 │   │   ├── index-layer.ts
 │   ├── layer3/                # Network Layer
 │   │   ├── NetworkLayer.ts
 │   │   ├── protocols/         # Layer 3 Protokolle
 │   │   │   ├── IPv4.ts
 │   │   │   ├── IPv6.ts
+│   │   │   ├── ICMP.ts
+│   │   │   ├── OSPF.ts
 │   │   ├── index-layer.ts
 │   ├── layer4/                # Transport Layer
 │   │   ├── TransportLayer.ts
 │   │   ├── protocols/         # Layer 4 Protokolle
 │   │   │   ├── TCP.ts
 │   │   │   ├── UDP.ts
+│   │   │   ├── TLS.ts
+│   │   │   ├── SSL.ts
 │   │   ├── index-layer.ts
 │   ├── layer5/                # Session Layer
 │   │   ├── SessionLayer.ts
+│   │   ├── protocols/
+│   │   │   ├── NetBIOS.ts
 │   │   ├── index-layer.ts
 │   ├── layer6/                # Presentation Layer
 │   │   ├── PresentationLayer.ts
+│   │   ├── protocols/
+│   │   │   ├── JSONProtocol.ts
+│   │   │   ├── XMLProtocol.ts
+│   │   │   ├── Base64.ts
+│   │   │   ├── ASCII.ts
+│   │   │   ├── Unicode.ts
+│   │   │   ├── ImageProtocols/
+│   │   │   │   ├── PNG.ts
+│   │   │   │   ├── JPEG.ts
+│   │   │   │   ├── GIF.ts
 │   │   ├── index-layer.ts
 │   ├── layer7/                # Application Layer
 │   │   ├── ApplicationLayer.ts
+│   │   ├── protocols/
+│   │   │   ├── HTTPProtocol.ts
+│   │   │   ├── HTTPSProtocol.ts
 │   │   ├── index-layer.ts
 ├── ports/                     # Ports und Services
 │   ├── Port20.ts
@@ -46,102 +67,141 @@ src/
 │   ├── index-ports.ts
 ├── OSIModel.ts                # Hauptklasse für die OSI-Simulation
 ├── main.ts                    # Einstiegspunkt des Programms
+
 ```
 
-## 🚀 Funktionen
+## 🚀Neue Funktionen
+---
 
-	•	Schichten des OSI-Modells:
-	•	Alle 7 Schichten sind vollständig implementiert, einschließlich dynamischer Protokoll- und Datenfluss-Simulation.
-	•	Port-Simulation:
-	•	Unterstützt Ports wie FTP (Port 21) und SSH (Port 22).
-	•	Session Layer:
-	•	Starten, Verwalten und Beenden von Sitzungen.
-	•	Presentation Layer:
-	•	Kodierung, Verschlüsselung und Dekodierung von Daten.
-	•	Dynamischer Protokollwechsel:
-	•	Unterstützt Protokolle wie Ethernet, IPv4, TCP, UDP und mehr.
+# Schichten des OSI-Modells
 
-## 💻 Beispiel in main.ts
+	•	Schicht 1 (Physical): Simuliert reale Übertragungsprotokolle wie Bluetooth und DSL.
+	•	Schicht 2 (Data Link): Unterstützt Protokolle wie Ethernet, WiFi und VLAN.
+	•	Schicht 3 (Network): Unterstützt IPv4, IPv6, ICMP und OSPF.
+	•	Schicht 4 (Transport): Enthält TCP, UDP, TLS und SSL.
+	•	Schicht 5 (Session): Sitzungsmanagement durch NetBIOS.
+	•	Schicht 6 (Presentation): Kodierung und Verschlüsselung mit JSON, XML, Base64, ASCII, und Bildformaten.
+	•	Schicht 7 (Application): HTTP und HTTPS unterstützen GET, POST, PUT, DELETE sowie Header-Verwaltung.
 
-```typescript
+ ## 💻 Beispiel in main.ts
+
+ ```typescript
+
 import OSIModel from "./OSIModel";
-import { TCP } from "./layers/layer4/protocols/TCP";
+import { HTTPProtocol } from "./layers/layer7/protocols/HTTPProtocol";
 import { Ethernet } from "./layers/layer2/protocols/Ethernet";
 import { IPv4 } from "./layers/layer3/protocols/IPv4";
 
-const osiModel = new OSIModel(new TCP(), new Ethernet(), new IPv4());
+const osiModel = new OSIModel(new HTTPProtocol(), new Ethernet(), new IPv4());
 
-// Set encryption key
-osiModel.setEncryptionKey("SECURE_KEY");
-
-// Start session
-osiModel.startSession();
+// Setze Header
+osiModel.setHeader("Authorization", "Bearer token");
+osiModel.setHeader("Content-Type", "application/json");
 
 // Transmit data
 osiModel.transmit("Hello, OSI Model!");
-
-// End session
-osiModel.endSession();
 ```
 
-## Erklärung
-
-	1.	Initialisierung des OSI-Modells:
-	•	Erstelle eine neue Instanz von OSIModel mit:
-	•	Transportprotokoll: TCP
-	•	Data Link-Protokoll: Ethernet
-	•	Netzwerkprotokoll: IPv4
-	2.	Verschlüsselung aktivieren:
-	•	Setze einen Verschlüsselungsschlüssel für den Presentation Layer mit setEncryptionKey.
-	3.	Sitzung starten:
-	•	Nutze startSession, um eine neue Sitzung zu starten.
-	4.	Datenübertragung:
-	•	Verwende transmit, um Daten über alle Layer zu senden.
-	5.	Sitzung beenden:
-	•	Beende die Sitzung mit endSession.
-
-## Beispielausgabe
-```plaintext
-Presentation Layer: Encryption key updated.
-Session Layer: Session started with ID SESSION-XYZ12345
-
---- OSI Transmission Start ---
-Application Layer: Preparing data for transmission...
-Presentation Layer: Encoding data with format UTF-8
-Presentation Layer: Encrypting data...
-Session Layer: Sending data in session SESSION-XYZ12345: Encrypted(SECURE_KEY): Encoded(UTF-8): Hello, OSI Model!
-Transport Layer: Sending data using protocol - TCP on Port 22
-Network Layer: Adding routing info using protocol - IPv4
-Data Link Layer: Using protocol - Ethernet
-Physical Layer: Transmitting bits...
-
---- OSI Transmission Complete ---
-
-Session Layer: Session SESSION-XYZ12345 ended.
-```
-
-## ⚙️ Verfügbare Ports
-
-| Port | Service       | Beschreibung                           |
-|------|---------------|-----------------------------------------|
-| 20   | FTP (Data)    | Datenübertragung für FTP               |
-| 21   | FTP (Control) | Steuerung der FTP-Verbindung           |
-| 22   | SSH           | Sicherer Zugriff auf Remote-Systeme    |
-| 23   | Telnet        | Unsicherer Zugriff auf Remote-Systeme  |
-| 25   | SMTP          | Versand von E-Mails                   |
-
+## ⚙️ Befehle
 ---
+
+# Verbindung und Datenübertragung:
+```plaintext
+setupConnection(destination: string): boolean
+teardownConnection(destination: string): string
+sendData(data: string, destination: string): string
+receiveData(data: string): string
+```
+
+## HTTP/HTTPS-spezifische Methoden
+---
+
+Port	Service	Beschreibung
+20	FTP (Data)	Datenübertragung für FTP
+21	FTP (Control)	Steuerung der FTP-Verbindung
+22	SSH	Sicherer Zugriff auf Remote-Systeme
+23	Telnet	Unsicherer Zugriff auf Remote-Systeme
+25	SMTP	Versand von E-Mails
+
 
 ## 📂 Verfügbare Protokolle
 
-### Layer 2: Data Link
-- Ethernet
-- WiFi
+# Layer 2: Data Link
 
-### Layer 3: Network
-- IPv4
-- IPv6
+	•	Ethernet
+	•	WiFi
+	•	VLAN
+	•	LACP
 
-### Layer 4: Transport
-- TCP
-- UDP
+# Layer 3: Network
+
+	•	IPv4
+	•	IPv6
+	•	ICMP
+	•	OSPF
+
+# Layer 4: Transport
+
+	•	TCP
+	•	UDP
+	•	TLS
+	•	SSL
+
+# Layer 5: Session
+
+	•	NetBIOS
+
+# Layer 6: Presentation
+
+	•	JSON
+	•	XML
+	•	Base64
+	•	ASCII
+	•	Unicode
+	•	PNG, JPEG, GIF
+
+# Layer 7: Application
+
+	•	HTTP
+	•	HTTPS
+
+## Beispielausgabe
+---
+
+```plaintext
+--- HTTP Protocol with Headers Example ---
+[HTTP] Attempting to establish connection to www.example.com...
+[HTTP] Connection to www.example.com established successfully.
+[HTTP] Header set: Authorization = Bearer token
+[HTTP] Header set: Content-Type = application/json
+[HTTP] Sending HTTP GET request to www.example.com...
+[HTTP] Headers: {
+  "Authorization": "Bearer token",
+  "Content-Type": "application/json"
+}
+[HTTP] GET Response: Data retrieved from www.example.com
+[HTTP] Sending HTTP POST request to www.example.com with body: {"key":"value"}
+[HTTP] Headers: {
+  "Authorization": "Bearer token",
+  "Content-Type": "application/json"
+}
+[HTTP] POST Response: Data posted to www.example.com
+
+[HTTP] Sending HTTP PUT request to www.example.com with body: {"updatedKey":"newValue"}
+[HTTP] Headers: {
+  "Authorization": "Bearer token",
+  "Content-Type": "application/json"
+}
+[HTTP] PUT Response: Data updated at www.example.com
+
+[HTTP] Sending HTTP DELETE request to www.example.com...
+[HTTP] Headers: {
+  "Authorization": "Bearer token",
+  "Content-Type": "application/json"
+}
+[HTTP] DELETE Response: Data deleted at www.example.com
+
+[HTTP] Tearing down connection to www.example.com...
+[HTTP] Connection to www.example.com closed successfully.
+´´´
+
